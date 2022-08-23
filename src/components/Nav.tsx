@@ -14,8 +14,8 @@ const Nav: FC = () => {
 
 	return (
 		<nav className="flex gap-2">
-			<Link to={"/"}>Contacts</Link>
-			<button onClick={onExit}>Exit</button>
+			{/* <Link to={"/"}>Contacts</Link> */}
+			<button className="text-red-500" onClick={onExit}>Exit</button>
 		</nav>
 	);
 };
