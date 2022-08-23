@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useAppSelector } from "@/store";
 import { Navigate, useOutlet } from "react-router-dom";
-import Menu from "./Menu";
+import Header from "./Header";
 
 const PrivateLayout: FC = () => {
 	const { isAuthenticated } = useAppSelector((state) => state.user);
@@ -12,8 +12,8 @@ const PrivateLayout: FC = () => {
 	}
 
 	return (
-		<div>
-			<Menu />
+		<div className="min-h-screen">
+			<Header />
 			{outlet}
 		</div>
 	);

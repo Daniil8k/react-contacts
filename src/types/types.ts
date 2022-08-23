@@ -1,3 +1,4 @@
 export interface IUser {
-    isAuthenticated: boolean;
+    id: string;
+    email: string;
 }
