@@ -6,7 +6,7 @@ export const Header: FC = () => {
 	const { user } = useAppSelector((state) => state.user);
 
 	return (
-		<div className="flex items-center justify-between p-2">
+		<div className="flex items-center justify-between py-2 px-4">
 			<div>{user?.email}</div>
 			<Nav />
 		</div>
