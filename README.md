@@ -1,5 +1,5 @@
 # React contacts
-Vite + React + RTK + TS.
+Vite + React + RTK.
 
 Node 14.18.1
 
