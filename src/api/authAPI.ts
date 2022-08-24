@@ -11,14 +11,16 @@ export interface IAuthResponse {
 	user: IUser;
 }
 
-export const login = async (payload: IAuthPayload) => {
+const login = async (payload: IAuthPayload) => {
 	const response = await baseAxios.post<IAuthResponse>("/login", payload);
 
 	return response.data;
 };
 
-export const register = async (payload: IAuthPayload) => {
+const register = async (payload: IAuthPayload) => {
 	const response = await baseAxios.post<IAuthResponse>("/register", payload);
 
 	return response.data;
 };
+
+export default { login, register };

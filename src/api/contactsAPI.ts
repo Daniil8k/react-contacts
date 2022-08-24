@@ -5,13 +5,13 @@ const getConfig = () => ({
 	headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") }
 });
 
-export const getContacts = async () => {
+const getAll = async () => {
 	const response = await baseAxios.get<IContact[]>("/contacts", getConfig());
 
 	return response.data;
 };
 
-export const createContact = async (contact: IContact) => {
+const create = async (contact: IContact) => {
 	const response = await baseAxios.post<IContact[]>(
 		"/contacts",
 		contact,
@@ -21,7 +21,7 @@ export const createContact = async (contact: IContact) => {
 	return response.data;
 };
 
-export const updateContact = async (contact: IContact) => {
+const update = async (contact: IContact) => {
 	const response = await baseAxios.put<IContact[]>(
 		`/contacts/${contact.id}`,
 		contact,
@@ -31,7 +31,7 @@ export const updateContact = async (contact: IContact) => {
 	return response.data;
 };
 
-export const deleteContact = async (contactId: IContact["id"]) => {
+const remove = async (contactId: IContact["id"]) => {
 	const response = await baseAxios.delete<IContact[]>(
 		`/contacts/${contactId}`,
 		getConfig()
@@ -39,3 +39,5 @@ export const deleteContact = async (contactId: IContact["id"]) => {
 
 	return response.data;
 };
+
+export default { getAll, create, update, remove };
