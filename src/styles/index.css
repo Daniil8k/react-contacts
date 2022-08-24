@@ -1,2 +1,4 @@
 @import "./settings/theme.css";
 @import "./settings/base.css";
+
+@import "./animations/rotate.css";
