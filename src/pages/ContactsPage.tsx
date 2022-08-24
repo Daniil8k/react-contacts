@@ -39,7 +39,7 @@ export const ContactsPage: FC = () => {
 					<Search value={search} setValue={setSearch} />
 					<button
 						type="button"
-						className="whitespace-nowrap text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+						className="btn-primary"
 					>
 						New contact
 					</button>

@@ -40,38 +40,32 @@ const AuthPage: FC = () => {
 				<h2 className="text-lg">{isRegister ? "Sign up" : "Sign in"}</h2>
 				<div
 					style={{ opacity: !!error ? 1 : 0 }}
-					className="min-h-[1.25rem] text-sm font-medium text-red-400 mb-1"
+					className="min-h-[1.25rem] text-sm font-medium text-danger mb-1"
 				>
 					{error}
 				</div>
-				<form className="flex flex-col" onSubmit={handleSubmit(onLogin)}>
+				<form className="flex flex-col mb-1" onSubmit={handleSubmit(onLogin)}>
 					<div className="text-left mb-2">
-						<label
-							htmlFor="email"
-							className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-						>
+						<label htmlFor="email" className="label mb-2">
 							Your email
 						</label>
 						<input
 							id="email"
 							type="email"
-							className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+							className="input-auth"
 							placeholder="name@company.com"
 							{...register("email")}
 							required
 						/>
 					</div>
 					<div className="text-left mb-6">
-						<label
-							htmlFor="password"
-							className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-						>
+						<label htmlFor="password" className="label mb-2">
 							Your password
 						</label>
 						<input
 							id="password"
 							type="password"
-							className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+							className="input-auth"
 							placeholder="••••"
 							{...register("password")}
 							required
@@ -79,18 +73,18 @@ const AuthPage: FC = () => {
 					</div>
 					<button
 						type="submit"
-						className="w-full mb-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+						className="btn-primary focus:ring-1 focus:outline-none focus:ring-blue-300"
 					>
 						{isRegister ? "Register" : "Login"}
 					</button>
 				</form>
-				<div className="flex px-1 justify-between text-sm font-medium text-gray-500 dark:text-gray-300">
+				<div className="flex px-1 justify-between text-sm font-medium text-neutral-light">
 					<span>
 						{isRegister ? "Already have an account?" : "Not registered?"}
 					</span>
 					<button
 						onClick={toggleRegister}
-						className="text-blue-700 hover:underline dark:text-blue-500"
+						className="text-primary-dark hover:underline"
 					>
 						{isRegister ? "Sign in" : "Sign up"}
 					</button>

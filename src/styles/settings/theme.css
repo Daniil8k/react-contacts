@@ -1,0 +1,22 @@
+/* Theme */
+:root {
+    --color-background: #242424;
+    --color-text: #ffffff;
+    
+    --color-primary-dark: #1d4ed8; 
+    --color-primary: #2563EB; 
+
+    --color-card-dark: #1F2937;
+    --color-card: #374151;
+    --color-card-light: #4B5563;
+
+    --color-neutral: #9CA3AF;
+    --color-neutral-light: #D1D5D8;
+
+    /* other colors */
+    --color-light: #FFFFFF;
+    --color-dark: #000000;
+    --color-warning: #F9AD50;
+    --color-success: #4ADD7F;
+    --color-danger: #E24444;
+}

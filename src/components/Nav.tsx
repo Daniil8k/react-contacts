@@ -15,7 +15,7 @@ const Nav: FC = () => {
 	return (
 		<nav className="flex gap-2">
 			{/* <Link to={"/"}>Contacts</Link> */}
-			<button className="text-red-500" onClick={onExit}>Exit</button>
+			<button className="text-danger hover:underline" onClick={onExit}>Exit</button>
 		</nav>
 	);
 };
