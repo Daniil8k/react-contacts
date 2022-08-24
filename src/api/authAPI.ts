@@ -1,4 +1,5 @@
-import axios from "axios";
+import baseAxios from "@/api/helpers/baseAxios";
+import { IUser } from "@/types/types";
 
 export interface IAuthPayload {
 	email: string;
@@ -7,26 +8,17 @@ export interface IAuthPayload {
 
 export interface IAuthResponse {
 	accessToken: string;
-	user: {
-		id: string;
-		email: string;
-	};
+	user: IUser;
 }
 
 export const login = async (payload: IAuthPayload) => {
-	const response = await axios.post<IAuthResponse>(
-		import.meta.env.VITE_API_BASE_URL + "/login",
-		payload
-	);
+	const response = await baseAxios.post<IAuthResponse>("/login", payload);
 
 	return response.data;
 };
 
 export const register = async (payload: IAuthPayload) => {
-	const response = await axios.post<IAuthResponse>(
-		import.meta.env.VITE_API_BASE_URL + "/register",
-		payload
-	);
+	const response = await baseAxios.post<IAuthResponse>("/register", payload);
 
 	return response.data;
 };

@@ -61,7 +61,7 @@ const onPending = (state: IState) => {
 };
 
 const onRejected = (state: IState, action: PayloadAction<string>) => {
-	state.user.id = "";
+	state.user.id = null;
 	state.user.email = "";
 	state.accessToken = null;
 	state.loading = false;
@@ -87,7 +87,7 @@ export const userSlice = createSlice({
 	initialState,
 	reducers: {
 		logout: (state) => {
-			state.user.id = "";
+			state.user.id = null;
 			state.user.email = "";
 			state.isAuthenticated = false;
 			state.accessToken = null;
