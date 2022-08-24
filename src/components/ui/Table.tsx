@@ -13,13 +13,9 @@ interface ITableHeader {
 	isSortable: boolean;
 }
 
-interface ITableRow {
-	[key: string]: string;
-}
-
 interface ITableProps {
 	headers: ITableHeader[];
-	tableData: ITableRow[];
+	tableData: any[];
 	search: string;
 	searchField: string;
 }

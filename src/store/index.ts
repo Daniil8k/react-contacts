@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
+import contactsReducer from "./reducers/contactsReducer";
 import userReducer from "./reducers/userReducer";
 
 export const store = configureStore({
 	reducer: {
-		user: userReducer
+		user: userReducer,
+		contacts: contactsReducer
 	}
 });
 
