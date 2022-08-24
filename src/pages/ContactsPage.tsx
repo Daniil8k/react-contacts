@@ -63,7 +63,12 @@ export const ContactsPage: FC = () => {
 						New contact
 					</button>
 				</div>
-				<Table headers={headers} tableData={tableData} />
+				<Table
+					headers={headers}
+					tableData={tableData}
+					search={search}
+					searchField="name"
+				/>
 			</div>
 		</div>
 	);

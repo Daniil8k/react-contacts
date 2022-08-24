@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useCallback, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import produce from "immer";
 import Sort from "./Sort";
 import { sort } from "@/types/types";
@@ -20,13 +20,34 @@ interface ITableRow {
 interface ITableProps {
 	headers: ITableHeader[];
 	tableData: ITableRow[];
+	search: string;
+	searchField: string;
 }
 
-export const Table: FC<ITableProps> = ({ headers, tableData }) => {
+export const Table: FC<ITableProps> = ({
+	headers,
+	tableData,
+	search,
+	searchField
+}) => {
 	const [sortField, setSortField] = useState<ISortField>({
 		name: headers[0].name,
 		sort: "asc"
 	});
+
+	const sortedData = useMemo(() => {
+		return [...tableData].sort((a, b) => {
+			return sortField.sort === "desc"
+				? b[sortField.name].localeCompare(a[sortField.name])
+				: a[sortField.name].localeCompare(b[sortField.name]);
+		});
+	}, [tableData, sortField.name, sortField.sort]);
+
+	const sortedAndSearchedData = useMemo(() => {
+		return sortedData.filter((item) => {
+			return item[searchField].toLowerCase().includes(search.toLowerCase());
+		});
+	}, [sortedData, search]);
 
 	const onChangeSort = (name: string) => {
 		setSortField(
@@ -42,7 +63,7 @@ export const Table: FC<ITableProps> = ({ headers, tableData }) => {
 	};
 
 	return (
-		<div className="max-w-[800px] overflow-x-auto relative shadow-md sm:rounded-lg">
+		<div className="min-w-[650px] max-w-[800px] overflow-x-auto relative shadow-md sm:rounded-lg">
 			<table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
 				<thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
 					<tr>
@@ -74,7 +95,7 @@ export const Table: FC<ITableProps> = ({ headers, tableData }) => {
 					</tr>
 				</thead>
 				<tbody>
-					{tableData.map((row, index) => (
+					{sortedAndSearchedData.map((row, index) => (
 						<tr
 							key={"row_" + index}
 							className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
