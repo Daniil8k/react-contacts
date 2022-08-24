@@ -1,7 +1,7 @@
-import { IAuthPayload, IAuthResponse, login, register } from "@/api/authAPI";
+import authAPI, { IAuthPayload, IAuthResponse } from "@/api/authAPI";
 import { IUser } from "@/types/types";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
+import catchThunkError from "@/store/helpers/catchThunkError";
 
 const accessToken = localStorage.getItem("accessToken")
 	? localStorage.getItem("accessToken")
@@ -27,30 +27,22 @@ const initialState: IState = {
 
 export const loginUser = createAsyncThunk(
 	"user/login",
-	async (payload: IAuthPayload, thunkAPI) => {
+	async (payload: IAuthPayload, { rejectWithValue }) => {
 		try {
-			return await login(payload);
+			return await authAPI.login(payload);
 		} catch (error) {
-			let message = axios.isAxiosError(error)
-				? error.response?.data || error.message || error.toString()
-				: error;
-
-			return thunkAPI.rejectWithValue(message);
+			return catchThunkError(error, rejectWithValue);
 		}
 	}
 );
 
 export const registerUser = createAsyncThunk(
 	"user/register",
-	async (payload: IAuthPayload, thunkAPI) => {
+	async (payload: IAuthPayload, { rejectWithValue }) => {
 		try {
-			return await register(payload);
+			return await authAPI.register(payload);
 		} catch (error) {
-			let message = axios.isAxiosError(error)
-				? error.response?.data || error.message || error.toString()
-				: error;
-
-			return thunkAPI.rejectWithValue(message);
+			return catchThunkError(error, rejectWithValue);
 		}
 	}
 );
