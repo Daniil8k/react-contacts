@@ -16,7 +16,7 @@ const IconButton: FC<IconButtonProps> = ({
 	return (
 		<button
 			className={[
-				"cursor-pointer border border-transparent focus:border-neutral hover:border-neutral rounded-md p-1",
+				"cursor-pointer border border-transparent hover:border-neutral rounded-md p-1",
 				isLoading ? "rotate-anim cursor-default" : "",
 				className
 			].join(" ")}
