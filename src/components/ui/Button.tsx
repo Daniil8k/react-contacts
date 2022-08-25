@@ -39,13 +39,13 @@ export const Button: FC<IButtonProps> = ({
 					? "bg-primary disabled:bg-primary-dark enabled:hover:bg-primary-dark border border-primary-light text-white"
 					: "",
 				color === "success"
-					? "bg-success disabled:bg-success-dark enabled:hover:bg-success-dark border border-success-dark text-black"
+					? "bg-success disabled:bg-success-dark enabled:hover:bg-success-dark border border-success-dark text-white"
 					: "",
 				color === "neutral"
 					? "bg-neutral disabled:bg-neutral-dark enabled:hover:bg-neutral-dark border border-neutral-dark text-black"
 					: "",
 				color === "danger"
-					? "bg-danger disabled:bg-danger-dark enabled:hover:bg-danger-dark border border-danger-dark text-black"
+					? "bg-danger disabled:bg-danger-dark enabled:hover:bg-danger-dark border border-danger-dark text-white"
 					: ""
 			].join(" ")}
 			{...btnProps}
