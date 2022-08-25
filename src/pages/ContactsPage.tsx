@@ -1,10 +1,11 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import Search from "@/components/ui/Search";
 import Table from "@/components/ui/Table";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { deleteContact, getContacts } from "@/store/reducers/contactsReducer";
 import { showEditModal } from "@/store/reducers/modalsReducer";
 import { IContact } from "@/types/types";
+import Button from "@/components/ui/Button";
 
 export const ContactsPage: FC = () => {
 	const dispatch = useAppDispatch();
@@ -32,9 +33,9 @@ export const ContactsPage: FC = () => {
 		dispatch(getContacts());
 	}, []);
 
-	const onCreateContact = () => {
+	const onCreateContact = useCallback(() => {
 		dispatch(showEditModal({ email: "", name: "", phone: "" }));
-	};
+	}, []);
 
 	const onEditContact = (contact: IContact) => {
 		dispatch(showEditModal(contact));
@@ -49,13 +50,9 @@ export const ContactsPage: FC = () => {
 			<div className="overflow-hidden">
 				<div className="flex gap-2 items-center justify-between mb-4">
 					<Search value={search} setValue={setSearch} />
-					<button
-						onClick={onCreateContact}
-						type="button"
-						className="btn-primary"
-					>
+					<Button onClick={onCreateContact} type="button" size="md">
 						New contact
-					</button>
+					</Button>
 				</div>
 				<Table
 					headers={headers}

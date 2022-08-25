@@ -4,7 +4,7 @@
 
 @layer components {
     .btn {
-        @apply h-10 text-sm whitespace-nowrap text-white bg-primary disabled:bg-primary-dark enabled:hover:bg-primary-dark font-medium rounded-lg inline-flex items-center justify-center;
+        @apply h-10 text-sm whitespace-nowrap border border-blue-500 text-white bg-primary disabled:bg-primary-dark enabled:hover:bg-primary-dark font-medium rounded-lg inline-flex items-center justify-center;
     }
     
     .btn-primary {
@@ -20,7 +20,7 @@
     }
 
     .input {
-        @apply outline-none border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-card border-neutral placeholder-neutral;
+        @apply h-10 outline-none border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 bg-card border-neutral placeholder-neutral;
     }
     
     .input-auth {

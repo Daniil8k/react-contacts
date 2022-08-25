@@ -1,20 +1,27 @@
-import { ButtonHTMLAttributes, FC } from "react";
+import { ButtonHTMLAttributes, FC, memo } from "react";
 import loadingSVG from "@/assets/loading.svg";
+
+type size = "md";
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	className?: string;
 	children?: string;
 	loading?: boolean;
+	size?: size;
 }
 
 export const Button: FC<IButtonProps> = ({
 	className = "",
 	children = "",
 	loading,
+	size,
 	...btnProps
 }) => {
 	return (
-		<button className={["btn", className].join(" ")} {...btnProps}>
+		<button
+			className={["btn", className, size === "md" ? "w-32" : ""].join(" ")}
+			{...btnProps}
+		>
 			{!loading && children}
 			{loading !== undefined && (
 				<img
@@ -28,4 +35,4 @@ export const Button: FC<IButtonProps> = ({
 	);
 };
 
-export default Button;
+export default memo(Button);
