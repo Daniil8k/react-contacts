@@ -4,29 +4,17 @@
 
 @layer components {
     .btn {
-        @apply w-full h-10 text-sm whitespace-nowrap font-medium rounded-lg inline-flex items-center justify-center;
-    }
-    
-    .btn-primary {
-        @apply whitespace-nowrap border border-primary text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-center;
-    }
-    
-    .btn-success {
-        @apply whitespace-nowrap border border-success text-black bg-success font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-center;
-    }
-    
-    .btn-neutral {
-        @apply whitespace-nowrap border border-neutral text-black bg-neutral font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-center;
+        @apply outline-none w-full h-10 text-sm whitespace-nowrap font-medium rounded-lg inline-flex items-center justify-center;
     }
 
     .input {
         @apply h-10 outline-none border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 bg-card border-neutral placeholder-neutral;
     }
-    
+
     .input-auth {
         @apply outline-none text-text border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-card-light border-neutral placeholder-neutral;
     }
-    
+
     .label {
         @apply block text-sm font-medium text-neutral;
     }
