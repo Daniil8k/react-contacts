@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import Icon, { IconProps } from "./Icon";
 
 interface IconButtonProps extends IconProps {
@@ -28,4 +28,4 @@ const IconButton: FC<IconButtonProps> = ({
 	);
 };
 
-export default IconButton;
+export default memo(IconButton);

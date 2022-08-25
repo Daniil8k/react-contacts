@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { Icon } from "@iconify/react";
+import { FC, memo } from "react";
+import { Icon as Iconify } from "@iconify/react";
 import { ESizes, sizeType } from "@/utils/constants";
 
 export interface IconProps {
@@ -10,24 +10,24 @@ export interface IconProps {
 	isVisible?: boolean;
 }
 
-const IconComponent: FC<IconProps> = ({
+const Icon: FC<IconProps> = ({
 	name,
 	size = "default",
 	color = "var(--color-neutral)",
 	className,
-	isVisible = true,
+	isVisible = true
 }) => {
 	return (
-		<Icon
+		<Iconify
 			icon={`mdi:${name}`}
 			className={className}
 			style={{
 				fontSize: ESizes[size] + "px",
 				opacity: isVisible ? 1 : 0,
-				color,
+				color
 			}}
 		/>
 	);
 };
 
-export default IconComponent;
+export default memo(Icon);

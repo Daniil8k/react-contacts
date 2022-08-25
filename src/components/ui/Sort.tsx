@@ -1,5 +1,5 @@
 import { sort } from "@/types/types";
-import { FC } from "react";
+import { FC, memo } from "react";
 
 interface ISortProps {
 	sort: sort;
@@ -31,4 +31,4 @@ export const Sort: FC<ISortProps> = ({ sort }) => {
 	);
 };
 
-export default Sort;
+export default memo(Sort);
