@@ -5,10 +5,13 @@
   "type": "module",
   "license": "MIT",
   "author": "Daniil8k",
+  "homepage": "https://daniil8k.github.io/react-contacts",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "predeploy": "npm run build",
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@headlessui/react": "^1.6.6",
@@ -29,6 +32,7 @@
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.0.1",
     "autoprefixer": "^10.4.8",
+    "gh-pages": "^4.0.0",
     "path": "^0.12.7",
     "postcss": "^8.4.16",
     "tailwindcss": "^3.1.8",
