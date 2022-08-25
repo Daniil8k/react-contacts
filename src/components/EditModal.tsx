@@ -4,7 +4,9 @@ import { hideEditModal } from "@/store/reducers/modalsReducer";
 import { IContact } from "@/types/types";
 import { FC, useEffect, useMemo } from "react";
 import { Controller, useForm } from "react-hook-form";
-import PhoneInput from "react-phone-number-input/input";
+import PhoneInput, {
+	formatPhoneNumberIntl
+} from "react-phone-number-input/input";
 import Modal from "./ui/Modal";
 
 export const EditModal: FC = ({}) => {
@@ -29,6 +31,7 @@ export const EditModal: FC = ({}) => {
 	}, [editModalData]);
 
 	const onSubmit = (contact: IContact) => {
+		contact.phone = formatPhoneNumberIntl(contact.phone);
 		dispatch(isNewContact ? createContact(contact) : updateContact(contact));
 	};
 
