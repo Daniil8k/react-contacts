@@ -14,6 +14,7 @@ module.exports = {
         primary: {
           dark: "var(--color-primary-dark)",
           DEFAULT: "var(--color-primary)",
+          light: "var(--color-primary-light)",
         },
         card: {
           dark: "var(--color-card-dark)",
@@ -21,6 +22,7 @@ module.exports = {
           light: "var(--color-card-light)",
         },
         neutral: {
+          dark: "var(--color-neutral-dark)",
           DEFAULT: "var(--color-neutral)",
           light: "var(--color-neutral-light)",
         },
@@ -34,9 +36,11 @@ module.exports = {
           DEFAULT: "var(--color-dark)",
         },
         success: {
+          dark: "var(--color-success-dark)",
           DEFAULT: "var(--color-success)",
         },
         danger: {
+          dark: "var(--color-danger-dark)",
           DEFAULT: "var(--color-danger)",
         },
         warning: {

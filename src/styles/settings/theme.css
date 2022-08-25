@@ -3,13 +3,15 @@
     --color-background: #242424;
     --color-text: #ffffff;
     
-    --color-primary-dark: #1d4ed8; 
+    --color-primary-dark: #1942b3; 
     --color-primary: #2563EB; 
+    --color-primary-light: #286bf9; 
 
     --color-card-dark: #1F2937;
     --color-card: #374151;
     --color-card-light: #4B5563;
 
+    --color-neutral-dark: #8c9199;
     --color-neutral: #9CA3AF;
     --color-neutral-light: #D1D5D8;
 
@@ -18,5 +20,7 @@
     --color-dark: #000000;
     --color-warning: #F9AD50;
     --color-success: #4ADD7F;
-    --color-danger: #E24444;
+    --color-success-dark: #309254;
+    --color-danger: #af3434;
+    --color-danger-dark: #912c2c;
 }

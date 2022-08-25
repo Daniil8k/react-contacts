@@ -7,6 +7,7 @@ import {
 	useRef
 } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import Button from "./Button";
 
 interface IModalProps {
 	open: boolean;
@@ -86,21 +87,17 @@ export const Modal: FC<IModalProps> = ({
 									</div>
 								</div>
 								<div className="bg-card px-4 py-3 sm:px-6 flex flex-col gap-3 sm:flex-row-reverse">
-									<button
-										type="button"
-										className="w-full btn-success"
-										onClick={onSaveClick}
-									>
+									<Button type="button" color="success" onClick={onSaveClick}>
 										{saveLabel}
-									</button>
-									<button
-										type="button"
-										className="w-full btn-neutral"
-										onClick={onCancelClick}
+									</Button>
+									<Button
 										ref={cancelButtonRef}
+										type="button"
+										onClick={onCancelClick}
+										color="neutral"
 									>
 										Cancel
-									</button>
+									</Button>
 								</div>
 							</Dialog.Panel>
 						</Transition.Child>

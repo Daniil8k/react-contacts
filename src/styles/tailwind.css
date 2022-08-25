@@ -4,7 +4,7 @@
 
 @layer components {
     .btn {
-        @apply h-10 text-sm whitespace-nowrap border border-blue-500 text-white bg-primary disabled:bg-primary-dark enabled:hover:bg-primary-dark font-medium rounded-lg inline-flex items-center justify-center;
+        @apply w-full h-10 text-sm whitespace-nowrap font-medium rounded-lg inline-flex items-center justify-center;
     }
     
     .btn-primary {
