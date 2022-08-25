@@ -1,7 +1,11 @@
-import { FC, memo } from "react";
+import { ButtonHTMLAttributes, FC, memo } from "react";
 import Icon, { IconProps } from "./Icon";
 
-interface IconButtonProps extends IconProps {
+interface IconButtonProps
+	extends IconProps,
+		ButtonHTMLAttributes<HTMLButtonElement> {
+	name: string;
+	className?: string;
 	isLoading?: boolean;
 	onClick?: () => void;
 }

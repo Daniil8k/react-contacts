@@ -1,7 +1,8 @@
 import { FC, memo } from "react";
 import { useAppDispatch } from "@/store";
 import { logout } from "@/store/reducers/userReducer";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import IconButton from "./ui/IconButton";
 
 const Nav: FC = () => {
 	const dispatch = useAppDispatch();
@@ -15,7 +16,7 @@ const Nav: FC = () => {
 	return (
 		<nav className="flex gap-2">
 			{/* <Link to={"/"}>Contacts</Link> */}
-			<button className="text-danger hover:underline" onClick={onExit}>Exit</button>
+			<IconButton name="logout" color="var(--color-danger)" onClick={onExit} />
 		</nav>
 	);
 };
