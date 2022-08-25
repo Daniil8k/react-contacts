@@ -3,16 +3,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IState {
 	isShowEditModal: boolean;
-	editModalData: IContact;
+	editModalData: IContact | null;
 }
 
 const initialState: IState = {
 	isShowEditModal: false,
-	editModalData: {
-		email: "",
-		name: "",
-		phone: ""
-	}
+	editModalData: null
 };
 
 export const modalsSlice = createSlice({
@@ -25,9 +21,7 @@ export const modalsSlice = createSlice({
 		},
 		hideEditModal(state) {
 			state.isShowEditModal = false;
-			state.editModalData.email = "";
-			state.editModalData.name = "";
-			state.editModalData.phone = "";
+			state.editModalData = null;
 		}
 	}
 });

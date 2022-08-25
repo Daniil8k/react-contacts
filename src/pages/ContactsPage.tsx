@@ -37,7 +37,7 @@ export const ContactsPage: FC = () => {
 	};
 
 	const onEditContact = (contact: IContact) => {
-		console.log("edit ", contact);
+		dispatch(showEditModal(contact));
 	};
 
 	const onDeleteContact = (contact: IContact) => {

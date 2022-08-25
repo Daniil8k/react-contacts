@@ -1,7 +1,8 @@
 import { useAppDispatch, useAppSelector } from "@/store";
+import { createContact, updateContact } from "@/store/reducers/contactsReducer";
 import { hideEditModal } from "@/store/reducers/modalsReducer";
 import { IContact } from "@/types/types";
-import { FC, useMemo } from "react";
+import { FC, useEffect, useMemo } from "react";
 import { Controller, useForm } from "react-hook-form";
 import PhoneInput from "react-phone-number-input/input";
 import Modal from "./ui/Modal";
@@ -11,15 +12,24 @@ export const EditModal: FC = ({}) => {
 	const { isShowEditModal, editModalData } = useAppSelector(
 		(state) => state.modals
 	);
-	const { register, handleSubmit, control } = useForm<IContact>();
+	const { register, handleSubmit, control, setValue } = useForm<IContact>();
 	const isNewContact = useMemo(() => !editModalData?.id, [editModalData?.id]);
 
 	const setOpen = () => {
 		dispatch(hideEditModal());
 	};
 
-	const onEdit = (contact: IContact) => {
-		console.log(contact);
+	useEffect(() => {
+		if (editModalData) {
+			setValue("id", editModalData.id);
+			setValue("email", editModalData.email);
+			setValue("name", editModalData.name);
+			setValue("phone", editModalData.phone);
+		}
+	}, [editModalData]);
+
+	const onSubmit = (contact: IContact) => {
+		dispatch(isNewContact ? createContact(contact) : updateContact(contact));
 	};
 
 	return (
@@ -27,7 +37,7 @@ export const EditModal: FC = ({}) => {
 			title={isNewContact ? "New contact" : "Edit contact"}
 			open={isShowEditModal}
 			setOpen={setOpen}
-			onSave={handleSubmit(onEdit)}
+			onSave={handleSubmit(onSubmit)}
 			saveLabel={isNewContact ? "Create" : "Edit"}
 		>
 			<form className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -40,7 +50,6 @@ export const EditModal: FC = ({}) => {
 						type="text"
 						className="input"
 						placeholder="John Smith"
-						defaultValue={editModalData.name}
 						{...register("name")}
 						required
 					/>
@@ -54,8 +63,7 @@ export const EditModal: FC = ({}) => {
 						type="email"
 						className="input"
 						placeholder="name@company.com"
-						defaultValue={editModalData.name}
-						{...register("name")}
+						{...register("email")}
 						required
 					/>
 				</div>
@@ -66,7 +74,6 @@ export const EditModal: FC = ({}) => {
 					<Controller
 						name="phone"
 						control={control}
-						defaultValue={editModalData.phone}
 						render={({ field: { onChange, value } }) => (
 							<PhoneInput
 								className="input"
