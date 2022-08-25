@@ -1,9 +1,19 @@
 # React contacts
-Vite + React + RTK.
+Web book of contacts📔.
 
-Node 14.18.1
+1. Register or login. (Test account: email ```test@mail.com``` and password ```1234```)
+
+2. Create, update, delete, search and sort your contacts.
+
+
+
+⚠ Your data storage time is limited because it depends on the [json-server](https://github.com/Daniil8k/json-server) as a backend.
+
+⚠ Before starting this project, you also have to ```clone``` and ```start``` [json-server](https://github.com/Daniil8k/json-server).
 
 ## Project setup
+
+
 ```
 npm i
 ```
