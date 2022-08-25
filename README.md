@@ -1,7 +1,7 @@
 # React contacts
 Web book of contacts📔.
 
-1. Register or login. (Test account: email ```test@mail.com``` and password ```password1```)
+1. Register or login. (Test account: email ```test@mail.com``` and password ```BAJFr2FF```)
 
 2. Create, update, delete, search and sort your contacts.
 
