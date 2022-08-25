@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer components {
+    .btn {
+        @apply h-10 text-sm whitespace-nowrap text-white bg-primary disabled:bg-primary-dark enabled:hover:bg-primary-dark font-medium rounded-lg inline-flex items-center justify-center;
+    }
+    
     .btn-primary {
         @apply whitespace-nowrap border border-primary text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-center;
     }

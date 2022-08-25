@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/store";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { loginUser, registerUser } from "@/store/reducers/userReducer";
+import Button from "@/components/ui/Button";
 
 export interface IAuthForm {
 	email: string;
@@ -12,7 +13,7 @@ export interface IAuthForm {
 const AuthPage: FC = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	const { isAuthenticated, error } = useAppSelector((state) => state.user);
+	const { isAuthenticated, error, loading } = useAppSelector((state) => state.user);
 	const { register, handleSubmit } = useForm<IAuthForm>();
 	const [isRegister, setIsRegister] = useState(false);
 
@@ -71,12 +72,14 @@ const AuthPage: FC = () => {
 							required
 						/>
 					</div>
-					<button
+					<Button
+						className="focus:ring-1 focus:outline-none focus:ring-blue-300"
+						loading={loading}
+						disabled={loading}
 						type="submit"
-						className="btn-primary focus:ring-1 focus:outline-none focus:ring-blue-300"
 					>
 						{isRegister ? "Register" : "Login"}
-					</button>
+					</Button>
 				</form>
 				<div className="flex px-1 justify-between text-sm font-medium text-neutral-light">
 					<span>
