@@ -15,7 +15,7 @@ export const EditModal: FC = ({}) => {
 		(state) => state.modals
 	);
 	const { register, handleSubmit, control, setValue } = useForm<IContact>();
-	const isNewContact = useMemo(() => !editModalData?.id, [editModalData?.id]);
+	const isNewContact = useMemo(() => isShowEditModal && !editModalData?.id, [isShowEditModal, editModalData]);
 
 	const setOpen = () => {
 		dispatch(hideEditModal());
