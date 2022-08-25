@@ -1,6 +1,7 @@
 /* Theme */
 :root {
     --color-background: #242424;
+    --color-background-light: #333333;
     --color-text: #ffffff;
     
     --color-primary-dark: #1942b3; 
