@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { IContact } from "@/types/types";
 import Table from "./ui/Table";
-import { getContacts } from "@/store/reducers/contactsReducer";
+import { deleteContact, getContacts } from "@/store/reducers/contactsReducer";
 import { useAppDispatch, useAppSelector } from "@/store";
 
 interface ITableProps {
@@ -38,7 +38,7 @@ export const ContactsTable: FC<ITableProps> = ({ search }) => {
 	};
 
 	const onDelete = (contact: IContact) => {
-		console.log("delete ", contact);
+		dispatch(deleteContact(contact.id));
 	};
 
 	return (

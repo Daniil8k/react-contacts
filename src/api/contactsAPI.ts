@@ -37,7 +37,7 @@ const remove = async (contactId: IContact["id"]) => {
 		getConfig()
 	);
 
-	return response.data;
+	return contactId;
 };
 
 export default { getAll, create, update, remove };
