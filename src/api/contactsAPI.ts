@@ -5,8 +5,16 @@ const getConfig = () => ({
 	headers: { Authorization: "Bearer " + localStorage.getItem("accessToken") }
 });
 
+const getUserId = () => {
+	let user = localStorage.getItem("user") ? localStorage.getItem("user") : null;
+	return user ? JSON.parse(user)?.id : "";
+};
+
 const getAll = async () => {
-	const response = await baseAxios.get<IContact[]>("/contacts", getConfig());
+	const response = await baseAxios.get<IContact[]>(
+		`/contacts?userId=${getUserId()}`,
+		getConfig()
+	);
 
 	return response.data;
 };
@@ -14,7 +22,7 @@ const getAll = async () => {
 const create = async (contact: IContact) => {
 	const response = await baseAxios.post<IContact[]>(
 		"/contacts",
-		contact,
+		{ ...contact, userId: getUserId() },
 		getConfig()
 	);
 
@@ -24,7 +32,7 @@ const create = async (contact: IContact) => {
 const update = async (contact: IContact) => {
 	const response = await baseAxios.put<IContact[]>(
 		`/contacts/${contact.id}`,
-		contact,
+		{ ...contact, userId: getUserId() },
 		getConfig()
 	);
 
