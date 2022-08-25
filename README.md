@@ -11,8 +11,10 @@ Web book of contacts📔.
 
 ![Frame 23](https://user-images.githubusercontent.com/93822098/186681363-2aa18228-3914-4b14-a8bd-4e4dd64b07da.png)
 
-## Project setup
+## Demo
+https://daniil8k.github.io/react-contacts/
 
+## Project setup
 
 ```
 npm i
