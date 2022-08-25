@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import contactsReducer from "./reducers/contactsReducer";
+import modalsReducer from "./reducers/modalsReducer";
 import userReducer from "./reducers/userReducer";
 
 export const store = configureStore({
 	reducer: {
 		user: userReducer,
-		contacts: contactsReducer
+		contacts: contactsReducer,
+		modals: modalsReducer
 	}
 });
 
