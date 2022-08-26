@@ -31,7 +31,9 @@ export const EditModal: FC = ({}) => {
 	}, [editModalData]);
 
 	const onSubmit = (contact: IContact) => {
-		contact.phone = formatPhoneNumberIntl(contact.phone);
+		contact.phone = formatPhoneNumberIntl(contact.phone)
+			? formatPhoneNumberIntl(contact.phone)
+			: contact.phone;
 		dispatch(isNewContact ? createContact(contact) : updateContact(contact));
 	};
 
