@@ -13,7 +13,9 @@ export interface IAuthForm {
 const AuthPage: FC = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	const { isAuthenticated, error, loading } = useAppSelector((state) => state.user);
+	const { isAuthenticated, error, loading } = useAppSelector(
+		(state) => state.user
+	);
 	const { register, handleSubmit } = useForm<IAuthForm>();
 	const [isRegister, setIsRegister] = useState(false);
 

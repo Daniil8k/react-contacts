@@ -6,11 +6,12 @@ import { deleteContact, getContacts } from "@/store/reducers/contactsReducer";
 import { showEditModal } from "@/store/reducers/modalsReducer";
 import { IContact } from "@/types/types";
 import Button from "@/components/ui/Button";
+import { toast } from "react-toastify";
 
 export const ContactsPage: FC = () => {
 	const dispatch = useAppDispatch();
 	const [search, setSearch] = useState("");
-	const { contacts } = useAppSelector((state) => state.contacts);
+	const { contacts, error } = useAppSelector((state) => state.contacts);
 	const headers = [
 		{
 			name: "name",
@@ -32,6 +33,12 @@ export const ContactsPage: FC = () => {
 	useEffect(() => {
 		dispatch(getContacts());
 	}, []);
+
+	useEffect(() => {
+		if (error) {
+			toast.error(error);
+		}
+	}, [error]);
 
 	const onCreateContact = useCallback(() => {
 		dispatch(showEditModal({ email: "", name: "", phone: "" }));
