@@ -8,3 +8,8 @@ export enum ESizes {
 }
 
 export type sizeType = keyof typeof ESizes;
+
+export enum ErrorsAPI {
+	noData = "Private resource access: entity must have a reference to the owner id",
+	jwtExpired = "jwt expired"
+}

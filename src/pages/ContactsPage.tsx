@@ -36,11 +36,10 @@ export const ContactsPage: FC = () => {
 	}, []);
 
 	useEffect(() => {
-		if (!error) return;
+		if (!error || error === ErrorsAPI.noData) return;
 
 		toast.error(error);
-
-		if (error === "jwt expired") {
+		if (error === ErrorsAPI.jwtExpired) {
 			dispatch(logout());
 		}
 	}, [error]);
