@@ -8,6 +8,7 @@ import { IContact } from "@/types/types";
 import Button from "@/components/ui/Button";
 import { toast } from "react-toastify";
 import { logout } from "@/store/reducers/userReducer";
+import { ErrorsAPI } from "@/utils/constants";
 
 export const ContactsPage: FC = () => {
 	const dispatch = useAppDispatch();
