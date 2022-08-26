@@ -7,6 +7,7 @@ import { showEditModal } from "@/store/reducers/modalsReducer";
 import { IContact } from "@/types/types";
 import Button from "@/components/ui/Button";
 import { toast } from "react-toastify";
+import { logout } from "@/store/reducers/userReducer";
 
 export const ContactsPage: FC = () => {
 	const dispatch = useAppDispatch();
@@ -35,8 +36,12 @@ export const ContactsPage: FC = () => {
 	}, []);
 
 	useEffect(() => {
-		if (error) {
-			toast.error(error);
+		if (!error) return;
+
+		toast.error(error);
+
+		if (error === "jwt expired") {
+			dispatch(logout());
 		}
 	}, [error]);
 
