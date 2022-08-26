@@ -3,6 +3,7 @@ import produce from "immer";
 import Sort from "@/components/ui/Sort";
 import { sort } from "@/types/types";
 import IconButton from "@/components/ui/IconButton";
+import loadingSVG from "@/assets/loading.svg";
 
 interface ISortField {
 	name: string;
@@ -25,6 +26,7 @@ interface ITableProps {
 	onEdit?: (item: any) => void;
 	onDelete?: (item: any) => void;
 	placeholder?: string;
+	loading?: boolean;
 }
 
 export const Table: FC<ITableProps> = ({
@@ -34,6 +36,7 @@ export const Table: FC<ITableProps> = ({
 	searchField = "",
 	width = "",
 	contentHeight = "",
+	loading,
 	onEdit = () => {},
 	onDelete = () => {},
 	placeholder = "No data"
@@ -100,7 +103,7 @@ export const Table: FC<ITableProps> = ({
 				</header>
 				<div
 					style={{ height: contentHeight }}
-					className="overflow-auto bg-card-dark"
+					className="relative overflow-auto bg-card-dark"
 				>
 					{sortedAndSearchedData.map((item, index) => (
 						<div key={"row_" + index} className="flex border-b border-card">
@@ -130,11 +133,17 @@ export const Table: FC<ITableProps> = ({
 							</div>
 						</div>
 					))}
-					{!sortedAndSearchedData.length && (
-						<div className="h-[inherit] flex items-center justify-center">
+					{!loading && !sortedAndSearchedData.length && (
+						<div className="h-full flex items-center justify-center">
 							{placeholder}
 						</div>
 					)}
+					<div
+						style={{ display: loading ? 'flex' : 'none' }}
+						className="bg-black/40 absolute inset-0 w-full h-full items-center justify-center"
+					>
+						<img width={24} height={24} src={loadingSVG} />
+					</div>
 				</div>
 			</div>
 		</div>

@@ -13,7 +13,9 @@ import { ErrorsAPI } from "@/utils/constants";
 export const ContactsPage: FC = () => {
 	const dispatch = useAppDispatch();
 	const [search, setSearch] = useState("");
-	const { contacts, error } = useAppSelector((state) => state.contacts);
+	const { contacts, error, loading } = useAppSelector(
+		(state) => state.contacts
+	);
 	const headers = [
 		{
 			name: "name",
@@ -75,6 +77,7 @@ export const ContactsPage: FC = () => {
 					contentHeight="70vh"
 					onEdit={onEditContact}
 					onDelete={onDeleteContact}
+					loading={loading}
 				/>
 			</div>
 		</div>
