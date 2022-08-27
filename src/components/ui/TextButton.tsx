@@ -13,7 +13,7 @@ export const TextButton: FC<ITextButtonProps> = ({
 	return (
 		<button
 			className={[
-				"text-primary-dark enabled:hover:underline disabled:cursor-default disabled:text-neutral",
+				"select-none text-primary-dark enabled:hover:underline disabled:cursor-default disabled:text-neutral",
 				className
 			].join(" ")}
 			{...btnProps}
