@@ -6,10 +6,12 @@ import { loginUser, registerUser } from "@/store/reducers/userReducer";
 import Button from "@/components/ui/Button";
 import useFade from "@/hooks/useFade";
 import TextButton from "@/components/ui/TextButton";
+import Input from "@/components/ui/Input";
 
 export interface IAuthForm {
 	email: string;
 	password: string;
+	confirm_password: string;
 }
 
 const AuthPage: FC = () => {
@@ -18,10 +20,41 @@ const AuthPage: FC = () => {
 	const { isAuthenticated, error, loading } = useAppSelector(
 		(state) => state.user
 	);
-	const { register, handleSubmit } = useForm<IAuthForm>();
+	const {
+		register,
+		handleSubmit,
+		setFocus,
+		watch,
+		reset,
+		formState: { errors: formErrors }
+	} = useForm<IAuthForm>();
 	const [isRegister, setIsRegister] = useState(false);
 	const contentRef = useRef<HTMLDivElement>(null);
 	const [startFadeAnimation, isFade] = useFade(contentRef);
+	const registerOptions = {
+		email: {
+			required: "Required",
+			pattern: {
+				value: /.+@.+/,
+				message: "Email is not valid"
+			}
+		},
+		password: {
+			required: "Required",
+			minLength: {
+				value: 4,
+				message: "At least 4 characters"
+			}
+		},
+		confirmPassword: {
+			required: "Required",
+			validate: (value: string) => {
+				if (watch("password") != value) {
+					return "Mismatch";
+				}
+			}
+		}
+	};
 
 	useEffect(() => {
 		if (isAuthenticated) {
@@ -29,11 +62,18 @@ const AuthPage: FC = () => {
 		}
 	}, []);
 
+	useEffect(() => {
+		setFocus && setFocus("email");
+	}, [setFocus, isFade]);
+
 	const toggleRegister = () => {
 		if (isFade) return;
 
-		setIsRegister((value) => !value);
+		reset(undefined, {
+			keepValues: true
+		});
 		startFadeAnimation();
+		setIsRegister((value) => !value);
 	};
 
 	const onLogin = async (data: IAuthForm) => {
@@ -49,38 +89,40 @@ const AuthPage: FC = () => {
 			<div ref={contentRef} className="w-64">
 				<h2 className="text-lg">{isRegister ? "Sign up" : "Sign in"}</h2>
 				<div
-					style={{ opacity: !!error ? 1 : 0 }}
+					style={{ opacity: error ? 1 : 0 }}
 					className="min-h-[1.25rem] text-sm font-medium text-danger mb-1"
 				>
 					{error}
 				</div>
 				<form className="flex flex-col mb-1" onSubmit={handleSubmit(onLogin)}>
-					<div className="text-left mb-2">
-						<label htmlFor="email" className="label mb-2">
-							Your email
-						</label>
-						<input
-							id="email"
-							type="email"
-							className="input-auth"
-							placeholder="name@company.com"
-							{...register("email")}
-							required
-						/>
-					</div>
-					<div className="text-left mb-2">
-						<label htmlFor="password" className="label mb-2">
-							Your password
-						</label>
-						<input
-							id="password"
+					<Input
+						id="email"
+						className="mb-2"
+						placeholder="name@company.com"
+						label="Email"
+						error={formErrors.email?.message}
+						{...register("email", registerOptions.email)}
+					/>
+					<Input
+						id="password"
+						type="password"
+						className="mb-2"
+						placeholder="••••"
+						label="Password"
+						error={formErrors.password?.message}
+						{...register("password", registerOptions.password)}
+					/>
+					{isRegister && (
+						<Input
+							id="confirm_password"
 							type="password"
-							className="input-auth"
+							className="mb-2"
 							placeholder="••••"
-							{...register("password")}
-							required
+							label="Confirm password"
+							error={formErrors.confirm_password?.message}
+							{...register("confirm_password", registerOptions.confirmPassword)}
 						/>
-					</div>
+					)}
 					<Button
 						className="mt-6 focus:ring-1 focus:outline-none focus:ring-blue-300"
 						loading={loading}
