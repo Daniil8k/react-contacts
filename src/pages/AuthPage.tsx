@@ -1,9 +1,10 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { loginUser, registerUser } from "@/store/reducers/userReducer";
 import Button from "@/components/ui/Button";
+import useFade from "@/hooks/useFade";
 
 export interface IAuthForm {
 	email: string;
@@ -18,6 +19,8 @@ const AuthPage: FC = () => {
 	);
 	const { register, handleSubmit } = useForm<IAuthForm>();
 	const [isRegister, setIsRegister] = useState(false);
+	const contentRef = useRef<HTMLDivElement>(null);
+	const [startFadeAnimation, isFade] = useFade(contentRef);
 
 	useEffect(() => {
 		if (isAuthenticated) {
@@ -26,7 +29,10 @@ const AuthPage: FC = () => {
 	}, []);
 
 	const toggleRegister = () => {
+		if (isFade) return;
+
 		setIsRegister((value) => !value);
+		startFadeAnimation();
 	};
 
 	const onLogin = async (data: IAuthForm) => {
@@ -39,7 +45,7 @@ const AuthPage: FC = () => {
 
 	return (
 		<div className="flex items-center justify-center min-h-screen">
-			<div className="w-64">
+			<div ref={contentRef} className="w-64">
 				<h2 className="text-lg">{isRegister ? "Sign up" : "Sign in"}</h2>
 				<div
 					style={{ opacity: !!error ? 1 : 0 }}
@@ -61,7 +67,7 @@ const AuthPage: FC = () => {
 							required
 						/>
 					</div>
-					<div className="text-left mb-6">
+					<div className="text-left mb-2">
 						<label htmlFor="password" className="label mb-2">
 							Your password
 						</label>
@@ -75,7 +81,7 @@ const AuthPage: FC = () => {
 						/>
 					</div>
 					<Button
-						className="focus:ring-1 focus:outline-none focus:ring-blue-300"
+						className="mt-6 focus:ring-1 focus:outline-none focus:ring-blue-300"
 						loading={loading}
 						disabled={loading}
 						type="submit"
@@ -89,7 +95,10 @@ const AuthPage: FC = () => {
 					</span>
 					<button
 						onClick={toggleRegister}
-						className="text-primary-dark hover:underline"
+						className={[
+							"text-primary-dark hover:underline",
+							isFade && "!text-neutral hover:!no-underline cursor-default"
+						].join(" ")}
 					>
 						{isRegister ? "Sign in" : "Sign up"}
 					</button>
