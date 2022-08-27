@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { loginUser, registerUser } from "@/store/reducers/userReducer";
 import Button from "@/components/ui/Button";
 import useFade from "@/hooks/useFade";
+import TextButton from "@/components/ui/TextButton";
 
 export interface IAuthForm {
 	email: string;
@@ -93,15 +94,9 @@ const AuthPage: FC = () => {
 					<span>
 						{isRegister ? "Already have an account?" : "Not registered?"}
 					</span>
-					<button
-						onClick={toggleRegister}
-						className={[
-							"text-primary-dark hover:underline",
-							isFade && "!text-neutral hover:!no-underline cursor-default"
-						].join(" ")}
-					>
+					<TextButton onClick={toggleRegister} disabled={isFade}>
 						{isRegister ? "Sign in" : "Sign up"}
-					</button>
+					</TextButton>
 				</div>
 			</div>
 		</div>
