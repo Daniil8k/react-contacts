@@ -7,6 +7,8 @@ import { Controller, useForm } from "react-hook-form";
 import PhoneInput, {
 	formatPhoneNumberIntl
 } from "react-phone-number-input/input";
+import Button from "./ui/Button";
+import Input from "./ui/Input";
 import Modal from "./ui/Modal";
 
 export const EditModal: FC = ({}) => {
@@ -14,19 +16,22 @@ export const EditModal: FC = ({}) => {
 	const { isShowEditModal, editModalData } = useAppSelector(
 		(state) => state.modals
 	);
-	const { register, handleSubmit, control, setValue } = useForm<IContact>();
+	const {
+		register,
+		handleSubmit,
+		control,
+		reset,
+		formState: { errors: formErrors }
+	} = useForm<IContact>();
 	const isNewContact = useMemo(() => !editModalData?.id, [editModalData]);
 
-	const setOpen = () => {
+	const hideModal = () => {
 		dispatch(hideEditModal());
 	};
 
 	useEffect(() => {
 		if (editModalData) {
-			setValue("id", editModalData.id);
-			setValue("email", editModalData.email);
-			setValue("name", editModalData.name);
-			setValue("phone", editModalData.phone);
+			reset({ ...editModalData });
 		}
 	}, [editModalData]);
 
@@ -35,60 +40,57 @@ export const EditModal: FC = ({}) => {
 			? formatPhoneNumberIntl(contact.phone)
 			: contact.phone;
 		dispatch(isNewContact ? createContact(contact) : updateContact(contact));
+		hideModal();
 	};
 
 	return (
-		<Modal
-			title={isNewContact ? "New contact" : "Edit contact"}
-			open={isShowEditModal}
-			setOpen={setOpen}
-			onSave={handleSubmit(onSubmit)}
-			saveLabel={isNewContact ? "Create" : "Edit"}
-		>
-			<form className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-				<div className="text-left">
-					<label htmlFor="name" className="label mb-2">
-						Name
-					</label>
-					<input
-						id="name"
-						type="text"
-						className="input"
-						placeholder="John Smith"
-						{...register("name")}
-						required
-					/>
-				</div>
-				<div className="text-left">
-					<label htmlFor="email" className="label mb-2">
-						Email
-					</label>
-					<input
-						id="email"
-						type="email"
-						className="input"
-						placeholder="name@company.com"
-						{...register("email")}
-						required
-					/>
-				</div>
-				<div className="text-left">
-					<label htmlFor="phone" className="label mb-2">
-						Phone
-					</label>
-					<Controller
-						name="phone"
-						control={control}
-						render={({ field: { onChange, value } }) => (
-							<PhoneInput
-								className="input"
-								value={value}
-								onChange={onChange}
-								placeholder="+1 000 000 0000"
-								id="phone"
+		<Modal open={isShowEditModal} setOpen={hideModal}>
+			<form className="bg-card-dark" onSubmit={handleSubmit(onSubmit)}>
+				<div className="p-4 pt-5 sm:p-6 sm:pb-4">
+					<h3 className="mb-2 text-lg leading-6 font-medium">
+						{isNewContact ? "New contact" : "Edit contact"}
+					</h3>
+					<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+						<Input
+							id="name"
+							label="Name"
+							placeholder="John Smith"
+							error={formErrors.name?.message}
+							{...register("name", { required: "Required" })}
+						/>
+						<Input
+							id="email"
+							label="Email"
+							placeholder="name@company.com"
+							{...register("email")}
+						/>
+						<div className="text-left">
+							<label htmlFor="phone" className="label mb-2">
+								Phone
+							</label>
+							<Controller
+								name="phone"
+								control={control}
+								render={({ field: { onChange, value } }) => (
+									<PhoneInput
+										id="phone"
+										className="input"
+										value={value}
+										onChange={onChange}
+										placeholder="+1 000 000 0000"
+									/>
+								)}
 							/>
-						)}
-					/>
+						</div>
+					</div>
+				</div>
+				<div className="p-4 sm:px-6 sm:py-4 bg-card flex flex-col gap-3 sm:flex-row-reverse">
+					<Button type="submit" color="success">
+						{isNewContact ? "Create" : "Edit"}
+					</Button>
+					<Button type="button" onClick={hideModal} color="neutral">
+						Cancel
+					</Button>
 				</div>
 			</form>
 		</Modal>
