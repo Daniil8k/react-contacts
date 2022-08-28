@@ -8,11 +8,7 @@
     }
 
     .input {
-        @apply h-10 outline-none border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 bg-card border-neutral placeholder-neutral;
-    }
-
-    .input-auth {
-        @apply outline-none text-text border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-card-light border-neutral placeholder-neutral;
+        @apply h-10 outline-none border text-sm rounded-lg focus:ring-primary-light focus:border-primary-light block w-full px-2.5 bg-card border-neutral placeholder-neutral;
     }
 
     .label {

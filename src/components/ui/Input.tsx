@@ -3,6 +3,7 @@ import { FC, ForwardedRef, forwardRef, InputHTMLAttributes } from "react";
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
 	forwardedRef?: ForwardedRef<HTMLInputElement>;
 	className?: string;
+	inputClass?: string;
 	error?: string;
 	label?: string;
 }
@@ -10,9 +11,11 @@ interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
 export const Input: FC<IInputProps> = ({
 	forwardedRef,
 	id,
-	className,
-	error,
-	label,
+	className = "",
+	inputClass = "",
+	error = "",
+	label = "",
+	type = "text",
 	...inputProps
 }) => {
 	return (
@@ -26,7 +29,8 @@ export const Input: FC<IInputProps> = ({
 			<input
 				ref={forwardedRef}
 				id={id}
-				className="input-auth"
+				className={["input", error && "!border-danger", inputClass].join(" ")}
+				type={type}
 				{...inputProps}
 			/>
 		</div>

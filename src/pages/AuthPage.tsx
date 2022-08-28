@@ -86,8 +86,8 @@ const AuthPage: FC = () => {
 
 	return (
 		<div className="flex items-center justify-center min-h-screen">
-			<div ref={contentRef} className="w-64">
-				<h2 className="text-lg">{isRegister ? "Sign up" : "Sign in"}</h2>
+			<div ref={contentRef} className="w-64 h-96">
+				<h2 className="text-xl">{isRegister ? "Sign Up" : "Log In"}</h2>
 				<div
 					style={{ opacity: error ? 1 : 0 }}
 					className="min-h-[1.25rem] text-sm font-medium text-danger mb-1"
@@ -98,6 +98,7 @@ const AuthPage: FC = () => {
 					<Input
 						id="email"
 						className="mb-2"
+						inputClass="!bg-card-light"
 						placeholder="name@company.com"
 						label="Email"
 						error={formErrors.email?.message}
@@ -107,6 +108,7 @@ const AuthPage: FC = () => {
 						id="password"
 						type="password"
 						className="mb-2"
+						inputClass="!bg-card-light"
 						placeholder="••••"
 						label="Password"
 						error={formErrors.password?.message}
@@ -117,6 +119,7 @@ const AuthPage: FC = () => {
 							id="confirm_password"
 							type="password"
 							className="mb-2"
+							inputClass="!bg-card-light"
 							placeholder="••••"
 							label="Confirm password"
 							error={formErrors.confirm_password?.message}
@@ -137,7 +140,7 @@ const AuthPage: FC = () => {
 						{isRegister ? "Already have an account?" : "Not registered?"}
 					</span>
 					<TextButton onClick={toggleRegister} disabled={isFade}>
-						{isRegister ? "Sign in" : "Sign up"}
+						{isRegister ? "Log In" : "Sign Up"}
 					</TextButton>
 				</div>
 			</div>
