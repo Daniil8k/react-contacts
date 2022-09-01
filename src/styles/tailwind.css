@@ -4,7 +4,7 @@
 
 @layer components {
     .btn {
-        @apply outline-none w-full h-10 text-sm whitespace-nowrap font-medium rounded-lg inline-flex items-center justify-center;
+        @apply select-none outline-none w-full h-10 text-sm whitespace-nowrap font-medium rounded-lg inline-flex items-center justify-center;
     }
 
     .input {
