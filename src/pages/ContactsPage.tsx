@@ -78,6 +78,7 @@ export const ContactsPage: FC = () => {
 					onEdit={onEditContact}
 					onDelete={onDeleteContact}
 					loading={loading}
+					placeholder="No contacts"
 				/>
 			</div>
 		</div>

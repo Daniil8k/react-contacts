@@ -121,11 +121,13 @@ export const Table: FC<ITableProps> = ({
 							))}
 							<div className="flex-1 flex items-center justify-center">
 								<IconButton
+									title="edit"
 									onClick={() => onEdit(item)}
 									name="edit"
 									color="var(--color-success)"
 								/>
 								<IconButton
+									title="delete"
 									onClick={() => onDelete(item)}
 									name="delete"
 									color="var(--color-danger)"

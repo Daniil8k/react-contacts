@@ -26,6 +26,7 @@ const IconButton: FC<IconButtonProps> = ({
 			].join(" ")}
 			onClick={onClick}
 			disabled={isLoading}
+			{...iconProps}
 		>
 			{<Icon name={isLoading ? "refresh" : name} {...iconProps} />}
 		</button>
