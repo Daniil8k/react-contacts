@@ -8,30 +8,33 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+
+import "cypress-localstorage-commands";
+
+Cypress.Commands.add("login", () => {
+	const email = "test@mail.com";
+	const password = "BAJFr2FF";
+
+	cy.request({
+		method: "POST",
+		url: "http://localhost:3000/login",
+		body: {
+			email,
+			password
+		}
+	})
+		.its("body")
+		.then((body) => {
+			cy.setLocalStorage("accessToken", body.accessToken);
+			cy.setLocalStorage("user", JSON.stringify(body.user));
+			cy.saveLocalStorage();
+		});
+});
+
+declare global {
+	namespace Cypress {
+		interface Chainable {
+			login(): Chainable<void>;
+		}
+	}
+}
