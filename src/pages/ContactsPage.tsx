@@ -9,6 +9,7 @@ import Button from "@/components/ui/Button";
 import { toast } from "react-toastify";
 import { logout } from "@/store/reducers/userReducer";
 import { ErrorsAPI } from "@/utils/constants";
+import { useNavigate } from "react-router-dom";
 
 export const ContactsPage: FC = () => {
 	const dispatch = useAppDispatch();
@@ -44,6 +45,7 @@ export const ContactsPage: FC = () => {
 		toast.error(error);
 		if (error === ErrorsAPI.jwtExpired) {
 			dispatch(logout());
+			navigate("/auth");
 		}
 	}, [error]);
 
