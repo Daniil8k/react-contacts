@@ -25,6 +25,7 @@ describe("Auth", () => {
 		const password = "password1";
 
 		cy.get("button").contains("Sign Up").as("signUpButton").click();
+		cy.wait(800)
 		cy.get("input#email").type(email);
 		cy.get("input#password").type(`${password}`);
 		cy.get("input#confirm_password").type(`${password}{enter}`);
