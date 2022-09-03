@@ -14,7 +14,7 @@ describe("Contacts", () => {
 
 	beforeEach(() => {
 		cy.restoreLocalStorage();
-		cy.wait(500);
+		cy.wait(1000);
 	});
 
 	it("Create new contact", () => {
@@ -34,7 +34,11 @@ describe("Contacts", () => {
 	it("Edit contact", () => {
 		let newEmail = "week@mail.ru";
 		let newPhone = "+1 920230";
-		cy.contains(contact.name).parent().find("button[title=edit]").click();
+		cy.contains(contact.name)
+			.parent()
+			.parent()
+			.find("button[title=edit]")
+			.click();
 
 		cy.get("input#email").type(`{selectAll}${newEmail}`);
 		cy.get("input#phone").type(`{selectAll}${newPhone}`);
@@ -47,6 +51,7 @@ describe("Contacts", () => {
 
 	it("Delete contact", () => {
 		cy.contains(contact.name)
+			.parent()
 			.parent()
 			.find("button[title=delete]")
 			.as("DeleteButton")

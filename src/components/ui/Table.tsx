@@ -125,7 +125,7 @@ export const Table: FC<ITableProps> = ({
 									className="flex items-center justify-start text-neutral cell"
 									style={{ flex: `${header.width} 1 0` }}
 								>
-									{item[header.name]}
+									<span>{item[header.name]}</span>
 								</div>
 							))}
 							<div className="flex-1 flex items-center justify-center">
