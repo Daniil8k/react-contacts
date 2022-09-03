@@ -10,6 +10,7 @@ import PhoneInput, {
 import Button from "./ui/Button";
 import Input from "./ui/Input";
 import Modal from "./ui/Modal";
+import UploadImage from "./ui/UploadImage";
 
 export const EditModal: FC = ({}) => {
 	const dispatch = useAppDispatch();
@@ -50,10 +51,22 @@ export const EditModal: FC = ({}) => {
 					<h3 className="mb-2 text-lg leading-6 font-medium">
 						{isNewContact ? "New contact" : "Edit contact"}
 					</h3>
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+					<div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
+						<Controller
+							name="imageSrc"
+							control={control}
+							render={({ field: { onChange, value } }) => (
+								<UploadImage
+									className="col-span-1"
+									value={value as string}
+									onChange={(url) => onChange(url)}
+								/>
+							)}
+						/>
 						<Input
 							id="name"
 							label="Name"
+							className="sm:col-span-4"
 							placeholder="John Smith"
 							error={formErrors.name?.message}
 							{...register("name", { required: "Required" })}
@@ -61,10 +74,11 @@ export const EditModal: FC = ({}) => {
 						<Input
 							id="email"
 							label="Email"
+							className="col-span-full"
 							placeholder="name@company.com"
 							{...register("email")}
 						/>
-						<div className="text-left">
+						<div className="col-span-full text-left">
 							<label htmlFor="phone" className="label mb-2">
 								Phone
 							</label>

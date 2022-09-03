@@ -76,12 +76,13 @@ export const ContactsPage: FC = () => {
 					data={contacts}
 					search={search}
 					searchField="name"
-					width="800px"
+					width="820px"
 					contentHeight="70vh"
 					onEdit={onEditContact}
 					onDelete={onDeleteContact}
 					loading={loading}
 					placeholder="No contacts"
+					imageProp="imageSrc"
 				/>
 			</div>
 		</div>

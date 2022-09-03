@@ -4,6 +4,7 @@ import Sort from "@/components/ui/Sort";
 import { sort } from "@/types/types";
 import IconButton from "@/components/ui/IconButton";
 import loadingSVG from "@/assets/loading.svg";
+import Avatar from "./Avatar";
 
 interface ISortField {
 	name: string;
@@ -14,6 +15,7 @@ interface ITableHeader {
 	name: string;
 	isSortable: boolean;
 	width: number;
+	image?: string;
 }
 
 interface ITableProps {
@@ -27,6 +29,7 @@ interface ITableProps {
 	onDelete?: (item: any) => void;
 	placeholder?: string;
 	loading?: boolean;
+	imageProp?: string;
 }
 
 export const Table: FC<ITableProps> = ({
@@ -37,6 +40,7 @@ export const Table: FC<ITableProps> = ({
 	width = "",
 	contentHeight = "",
 	loading,
+	imageProp,
 	onEdit = () => {},
 	onDelete = () => {},
 	placeholder = "No data"
@@ -80,14 +84,14 @@ export const Table: FC<ITableProps> = ({
 	return (
 		<div className="w-full overflow-x-auto shadow-md rounded-lg">
 			<div style={{ width }} className="text-sm">
-				<header className="text-xs uppercase text-neutral-light bg-card-light flex pr-[6px]">
+				<header className="select-none text-xs uppercase text-neutral-light bg-card-light flex pr-[6px]">
 					{headers.map((header) => (
 						<div
 							key={header.name}
 							onClick={() => onChangeSort(header)}
 							className={[
 								header.isSortable ? "cursor-pointer hover:bg-card" : "",
-								"py-3 px-6  select-none flex items-center gap-2"
+								"flex items-center gap-2 cell"
 							].join(" ")}
 							style={{ flex: `${header.width} 1 0%` }}
 						>
@@ -107,13 +111,18 @@ export const Table: FC<ITableProps> = ({
 				>
 					{sortedAndSearchedData.map((item, index) => (
 						<div key={"row_" + index} className="flex border-b border-card">
-							{headers.map((header, index) => (
+							<div
+								key="col_0"
+								className="text-base font-medium text-text flex items-center cell"
+								style={{ flex: `${headers[0].width} 1 0` }}
+							>
+								{imageProp && <Avatar src={item[imageProp]} />}
+								<span className="ml-2">{item[headers[0].name]}</span>
+							</div>
+							{headers.slice(1).map((header, index) => (
 								<div
-									key={"col_" + index}
-									className={[
-										"flex items-center justify-start text-neutral overflow-hidden text-ellipsis py-3 px-6 whitespace-nowrap",
-										index === 0 ? "text-base font-medium text-text" : ""
-									].join(" ")}
+									key={"col_" + index + 1}
+									className="flex items-center justify-start text-neutral cell"
 									style={{ flex: `${header.width} 1 0` }}
 								>
 									{item[header.name]}
@@ -141,7 +150,7 @@ export const Table: FC<ITableProps> = ({
 						</div>
 					)}
 					<div
-						style={{ display: loading ? 'flex' : 'none' }}
+						style={{ display: loading ? "flex" : "none" }}
 						className="bg-black/40 absolute inset-0 w-full h-full items-center justify-center"
 					>
 						<img width={24} height={24} src={loadingSVG} />
