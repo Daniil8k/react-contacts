@@ -19,7 +19,7 @@ const Icon: FC<IconProps> = ({
 }) => {
 	return (
 		<Iconify
-			icon={`mdi:${name}`}
+			icon={`mdi-light:${name}`}
 			className={className}
 			style={{
 				fontSize: ESizes[size] + "px",

@@ -123,7 +123,7 @@ export const Table: FC<ITableProps> = ({
 								<IconButton
 									title="edit"
 									onClick={() => onEdit(item)}
-									name="edit"
+									name="pencil"
 									color="var(--color-success)"
 								/>
 								<IconButton

@@ -17,7 +17,7 @@ export const Search: FC<ISearchProps> = ({
 	return (
 		<div className={["relative", className ? className : ""].join(" ")}>
 			<div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-				<Icon name="search" />
+				<Icon name="magnify" />
 			</div>
 			<input
 				className="pl-10 input"

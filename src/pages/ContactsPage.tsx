@@ -12,6 +12,7 @@ import { ErrorsAPI } from "@/utils/constants";
 import { useNavigate } from "react-router-dom";
 
 export const ContactsPage: FC = () => {
+	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 	const [search, setSearch] = useState("");
 	const { contacts, error, loading } = useAppSelector(
