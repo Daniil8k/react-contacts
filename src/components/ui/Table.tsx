@@ -5,6 +5,7 @@ import { sort } from "@/types/types";
 import IconButton from "@/components/ui/IconButton";
 import loadingSVG from "@/assets/loading.svg";
 import Avatar from "./Avatar";
+import SearchCell from "./SearchCell";
 
 interface ISortField {
 	name: string;
@@ -62,7 +63,13 @@ export const Table: FC<ITableProps> = ({
 		if (!searchField || !search) return sortedData;
 
 		return sortedData.filter((item) => {
-			return item[searchField].toLowerCase().includes(search.toLowerCase());
+			let index = headers.reduce((acc, header) => {
+				return (acc += item[header.name]
+					.toLowerCase()
+					.includes(search.toLowerCase()));
+			}, 0);
+
+			return index;
 		});
 	}, [sortedData, search]);
 
@@ -117,7 +124,9 @@ export const Table: FC<ITableProps> = ({
 								style={{ flex: `${headers[0].width} 1 0` }}
 							>
 								{imageProp && <Avatar src={item[imageProp]} />}
-								<span className="ml-2">{item[headers[0].name]}</span>
+								<span className="ml-2">
+									<SearchCell search={search} value={item[headers[0].name]} />
+								</span>
 							</div>
 							{headers.slice(1).map((header, index) => (
 								<div
@@ -125,7 +134,7 @@ export const Table: FC<ITableProps> = ({
 									className="flex items-center justify-start text-neutral cell"
 									style={{ flex: `${header.width} 1 0` }}
 								>
-									<span>{item[header.name]}</span>
+									<SearchCell search={search} value={item[header.name]} />
 								</div>
 							))}
 							<div className="flex-1 flex items-center justify-center">
